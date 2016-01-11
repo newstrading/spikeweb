@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="root" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="/data.js"></script>
+</head>
+
+<body>
+  <h1> yeah </h1>
+
+
+<div ng-controller="index">{{message}}</div>
+
+
+<div ng-controller="willy">{{message}}</div>
+
+<div ng-controller="willy" >
+    <h2>EI LIST</h2>
+
+    <input type=text list=releases >
+    <datalist id=releases  value ={{eiid}}>
+      <div ng-repeat="ei in releases">
+        <option value="{{ei.EIId}}"> {{ei.Name}}
+      </div>
+    </datalist>
+
+
+</div>
+
+
+
+
+</body>
+
+</html>

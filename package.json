@@ -1,0 +1,23 @@
+{
+  "name": "spikeweb",
+  "version": "1.0.0",
+  "description": "newstrading web frontend",
+  "main": "app.js",
+  "scripts": {
+    "dev": "export NODE_ENV=dev && node app.js",
+    "production": "export NODE_ENV=production && node app.js"
+  },
+  "dependencies": {
+    "csv": "^0.4.5",
+    "csv-parse": "^0.1.4",
+    "csv-parser": "^1.9.1",
+    "express": "^4.12.3",
+    "express-session": "^1.11.3",
+    "fs": "0.0.2",
+    "xml-parser": "^1.2.0",
+    "xml2js": "^0.4.8"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  }
+}
