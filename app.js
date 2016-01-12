@@ -16,7 +16,7 @@ app.use(express.static('public'));      // public static content
 
 app.get('/api/ei', function(req, res) {
   console.log("/api/ei get received");
-  res.json(data.releases);
+  res.json( data.loadEIList() );
 });
 
 app.get('/api/data/:eiid', function(req, res) {
@@ -28,7 +28,7 @@ app.get('/api/data/:eiid', function(req, res) {
 });
 
 
-var port = 80;
+var port = 88;
 var httpServer = http.createServer(app);
 httpServer.listen(port);
 

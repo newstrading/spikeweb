@@ -1,5 +1,6 @@
 var csv = require('csv-parser')
 var fs = require('fs')
+var moment = require('moment');
 
 var releases = [
   { EIId: 103, Name: "AU Australia CPI"},
@@ -10,6 +11,44 @@ var releases = [
 
 ];
 
+var parseString = require('xml2js').parseString;
+function xmlResult (err, result) {
+   //console.log ("setting releases: " + JSON.stringify(result) );
+   console.log ("Number EI releases: " + result.EImaster.EI.length );
+   releases = result.EImaster.EI;
+ }
+
+fs.readFile("EImaster.xml", function (err, xml) {
+    if (err) {
+      console.log("EImaster.xml file  read error");
+      throw err;
+    }
+    else {
+      //console.log("file: " + xml);
+      parseString(xml, 	xmlResult);
+     }
+ });
+
+ var loadEIList = function () {
+
+   var importantReleases = [];
+   for (var i = 0, len = releases.length; i < len; i++) {
+     var p = releases[i].importance;
+     //console.log (p[0]);
+     if ( (p[0] === "3") || (p[0] === "2")  ) {
+       importantReleases.push (releases[i]);
+     }
+  }
+   console.log ("important releases: " + importantReleases.length);
+
+   return importantReleases;
+  //return releases;
+};
+
+function tryParseNumber(str) {
+    var s = str.trim();//.replace(',', '.');
+    return (isNaN(s) || s === '') ? s : parseFloat(s);
+}
 
 var loadDataEiid = function (eiid, result) {
   var data = [];
@@ -20,6 +59,16 @@ var loadDataEiid = function (eiid, result) {
       //console.log('row', row.symbol + " " + row.EIId);
       if (row.EIId === eiString) {
         //console.log('yeah.....');
+
+        //console.log ("eventDate: " + row.EventDate);
+        var dateB = moment(row.EventDate);
+        var sDate = dateB.format("YYYYMMDD_HHmm");
+        row.mylink = "/charts/spike_" + sDate + "_" + row.symbol + ".jpg";
+        //console.log ("link: " + row.mylink);
+
+        row.SpikePips  = tryParseNumber (row.SpikePips);
+        row.SpikePips = row.SpikePips.toFixed(2);
+
         data.push (row);
       }
     })
@@ -29,5 +78,5 @@ var loadDataEiid = function (eiid, result) {
     })
 }
 
-module.exports.releases = releases;
+module.exports.loadEIList = loadEIList;
 module.exports.loadDataEiid = loadDataEiid;

@@ -2,39 +2,51 @@
 <html ng-app="root" lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    <script src="/data.js"></script>
+  <link rel="stylesheet" href="data.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="/data.js"></script>
 </head>
 
 <body>
-  <h1> yeah </h1>
 
+  <div ng-controller="willy">
+    <select ng-model="eiid" ng-options="ei.EIname for ei in releases" ng-change="change()"></select>
 
-<div ng-controller="index">{{message}}</div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th> DateTime </th>
+          <th> Deviation </th>
+          <th> PreReleasePrice</th>
+          <th> SpikeMax </th>
+          <th> SpikePips </th>
+          <th> Symbol </th>
+        </tr>
+      </thead>
 
+      <tbody>
+        <tr ng-repeat="e in eventList">
+          <td> {{e.EventDate}} </td>
+          <td> {{e.Deviation}}</td>
+          <td> {{e.PreReleasePrice}}</td>
+          <td> {{e.SpikeMaximumPrice}}</td>
+          <td> {{e.SpikePips}}</td>
+          <td> <button data-ng-click="myclick(e.mylink)"> {{e.symbol}} </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-<div ng-controller="willy">{{message}}</div>
+    <div class="abc" id="abc">
+      <img src="{{mylink}}" alt="chart" />
+    </div>
 
-<div ng-controller="willy" >
-    <h2>EI LIST</h2>
-
-    <input type=text list=releases >
-    <datalist id=releases  value ={{eiid}}>
-      <div ng-repeat="ei in releases">
-        <option value="{{ei.EIId}}"> {{ei.Name}}
-      </div>
-    </datalist>
-
-
-</div>
-
-
-
+  </div>
 
 </body>
-
 </html>

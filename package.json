@@ -14,8 +14,9 @@
     "express": "^4.12.3",
     "express-session": "^1.11.3",
     "fs": "0.0.2",
+    "moment": "^2.11.1",
     "xml-parser": "^1.2.0",
-    "xml2js": "^0.4.8"
+    "xml2js": "^0.4.15"
   },
   "devDependencies": {
     "gulp": "^3.9.0"
