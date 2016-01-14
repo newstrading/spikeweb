@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="root" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <link rel="stylesheet" href="data.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="/history.js"></script>
+</head>
+
+<body>
+
+  <div ng-controller="willy">
+    <select ng-model="eiid" ng-options="ei.EIname for ei in releases" ng-change="change()"></select>
+
+    <p> {{desc.ReleaseName}} ( {{desc.BloombergID}} ) Significance: {{desc.Significance}} Release Time: {{desc.ReleaseTime}} - {{desc.Country}} {{desc.LocalTimeZone}}</p>
+    <p> Frequency: {{desc.Frequency}} Units: {{desc.QuoteUnits}}  Source: {{desc.Source}} Begin: {{desc.Begin}}</p>
+    <p>{{desc.Description}} </p>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th> DateTime </th>
+          <th> Actual </th>
+          <th> Consensus</th>
+          <th> High </th>
+          <th> Low </th>
+          <th> Median </th>
+          <th> Number </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="e in eventList">
+          <td> {{e.DateTime}} </td>
+          <td> {{e.Actual}}</td>
+          <td> {{e.Consensus}}</td>
+          <td> {{e.EstimateHigh}}</td>
+          <td> {{e.EstimateLow}}</td>
+          <td> {{e.EstimateMedian}} </td>
+          <td> {{e.EstimateNumber}} </td>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+
+</body>
+
+</html>

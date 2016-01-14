@@ -2,7 +2,7 @@
 var http = require('http');		// http server (without express framework)
 var express = require('express');	// express framework (page routing)
 var fs = require('fs');
-var data = require('./data');
+var data = require('./db');
 
 // express.js engine
 var app = express();
@@ -26,6 +26,25 @@ app.get('/api/data/:eiid', function(req, res) {
       res.json(data);
   });
 });
+
+app.get('/api/history/:eiid', function(req, res) {
+  var eiid = req.param("eiid")
+  console.log("/api/history get received for eiid: " + eiid);
+  data.loadHistory(eiid, function (data) {
+      res.json(data);
+  });
+});
+
+
+
+app.get('/api/desc/:eiid', function(req, res) {
+  var eiid = req.param("eiid")
+  console.log("/api/desc get received for eiid: " + eiid);
+  data.loadDescriptive(eiid, function (data) {
+      res.json(data);
+  });
+});
+
 
 
 var port = 88;
