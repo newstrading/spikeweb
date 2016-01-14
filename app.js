@@ -14,6 +14,11 @@ app.use(express.static('public'));      // public static content
 //app.use(express.urlencoded());
 //app.use(express.json());      // if needed
 
+app.get('/', function(req, res){
+  res.sendfile('./public/default.html');
+});
+
+
 app.get('/api/ei', function(req, res) {
   console.log("/api/ei get received");
   res.json( data.loadEIList() );
