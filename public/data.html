@@ -22,6 +22,8 @@
         <tr>
           <th> DateTime </th>
           <th> Deviation </th>
+          <th> Signal </th>
+          <th> U/D </th>
           <th> PreReleasePrice</th>
           <th> SpikeMax </th>
           <th> SpikePips </th>
@@ -33,6 +35,8 @@
         <tr ng-repeat="e in eventList">
           <td> {{e.EventDate}} </td>
           <td> {{e.Deviation}}</td>
+          <td> {{e.DSignal}}</td>
+          <td> {{e.Direction}}</td>
           <td> {{e.PreReleasePrice}}</td>
           <td> {{e.SpikeMaximumPrice}}</td>
           <td> {{e.SpikePips}}</td>

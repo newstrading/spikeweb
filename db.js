@@ -57,6 +57,7 @@ var loadEIList = function() {
 
 function tryParseNumber(str) {
   var s = str.trim(); //.replace(',', '.');
+  s= s.replace(",", ".");
   return (isNaN(s) || s === '') ? s : parseFloat(s);
 }
 
@@ -64,7 +65,14 @@ var loadDataEiid = function(eiid, result) {
   var data = [];
   var eiString = eiid + "";
   fs.createReadStream('analysis.csv')
-    .pipe(csv())
+    .pipe(csv({
+      raw: false, // do not decode to utf-8 strings
+      separator: ',', // specify optional cell separator
+      quote: '"', // specify optional quote character
+      escape: '"', // specify optional escape character (defaults to quote value)
+      newline: '\n', // specify a newline character
+      strict: true // require column length match headers length
+    }))
     .on('data', function(row) {
       //console.log('row', row.symbol + " " + row.EIId);
       if (row.EIId === eiString) {
@@ -76,8 +84,11 @@ var loadDataEiid = function(eiid, result) {
         row.mylink = "/charts/spike_" + sDate + "_" + row.symbol + ".jpg";
         //console.log ("link: " + row.mylink);
 
+        //console.log("spikePips: " + row.SpikePips );
+
         row.SpikePips = tryParseNumber(row.SpikePips);
-        row.SpikePips = row.SpikePips.toFixed(2);
+        //        console.log(typeof(row.SpikePips));
+        if (row.SpikePips) row.SpikePips = row.SpikePips.toFixed(2);
 
         data.push(row);
       }
