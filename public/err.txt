@@ -1,5 +1,0 @@
-function eiCtrl ( $scope, $http, $timeout) {
-
-
-
-}

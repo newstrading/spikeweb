@@ -1,3 +1,6 @@
+var config = require('config');
+var appConfig = config.get('App');
+
 var csv = require('csv-parser')
 var fs = require('fs')
 var moment = require('moment');
@@ -28,8 +31,8 @@ function xmlResult(err, result) {
   console.log("Number EI releases: " + result.EImaster.EI.length);
   releases = result.EImaster.EI;
 }
-
-fs.readFile("EImaster.xml", function(err, xml) {
+var eiMasterFile = appConfig.data.dataFolder + "EImaster.xml";
+fs.readFile(eiMasterFile, function(err, xml) {
   if (err) {
     console.log("EImaster.xml file  read error");
     throw err;
@@ -64,7 +67,8 @@ function tryParseNumber(str) {
 var loadDataEiid = function(eiid, result) {
   var data = [];
   var eiString = eiid + "";
-  fs.createReadStream('analysis.csv')
+  var analysisFile = appConfig.data.dataFolder + 'analysis.csv';
+  fs.createReadStream(analysisFile)
     .pipe(csv({
       raw: false, // do not decode to utf-8 strings
       separator: ',', // specify optional cell separator
@@ -102,7 +106,8 @@ var loadDataEiid = function(eiid, result) {
 var loadHistory = function(eiid, result) {
     var data = [];
     var eiString = eiid + "";
-    fs.createReadStream('history.csv')
+    var historyFile = appConfig.data.dataFolder + 'history.csv';
+    fs.createReadStream(historyFile)
       .pipe(csv({
         raw: false, // do not decode to utf-8 strings
         separator: ',', // specify optional cell separator
@@ -128,7 +133,8 @@ var loadHistory = function(eiid, result) {
 var loadDescriptive = function(eiid, result) {
     var data = {};
     var eiString = eiid + "";
-    fs.createReadStream('releases.csv')
+    var releasesFile = appConfig.data.dataFolder +'releases.csv';
+    fs.createReadStream(releasesFile)
       .pipe(csv({
         raw: false, // do not decode to utf-8 strings
         separator: ',', // specify optional cell separator

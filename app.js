@@ -1,4 +1,6 @@
 // external modules
+var config = require('config');
+var appConfig = config.get('App');
 var http = require('http');		// http server (without express framework)
 var express = require('express');	// express framework (page routing)
 var fs = require('fs');
@@ -7,6 +9,7 @@ var data = require('./db');
 // express.js engine
 var app = express();
 app.use(express.static('public'));      // public static content
+app.use('/charts', express.static( appConfig.data.dataFolder + "charts" ));
 //app.use( bodyParser.json() );       // to support JSON-encoded bodies
 //app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 //  extended: true
@@ -52,8 +55,7 @@ app.get('/api/desc/:eiid', function(req, res) {
 
 
 
-var port = 88;
 var httpServer = http.createServer(app);
-httpServer.listen(port);
+httpServer.listen(appConfig.server.port);
 
-console.log('demo .org starting on http-port: '  + port);
+console.log('demo .org starting on http-port: '  + appConfig.server.port);

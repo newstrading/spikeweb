@@ -1,0 +1,10 @@
+{
+  "App": {
+    "server": {
+      "port": 88
+    },
+    "data": {
+      "dataFolder": "dataDemo/"
+    }
+  }
+}

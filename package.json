@@ -8,6 +8,7 @@
     "production": "export NODE_ENV=production && node app.js"
   },
   "dependencies": {
+    "config": "^1.19.0",
     "csv": "^0.4.5",
     "csv-parse": "^0.1.4",
     "csv-parser": "^1.9.1",
