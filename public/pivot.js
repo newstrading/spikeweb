@@ -26,11 +26,11 @@ angular.module('root', [])
       console.log("ei data received: items:" + data.length);
       //console.log("ei data= " + JSON.stringify(data));
       $scope.eventList = data;
-      
+
       $("#output").pivotUI(
           data ,
           {
-              rows: ["EventDate"],
+              rows: ["EventDate", "DSignal", "Deviation"	],
               cols: ["symbol"],
               vals: ["SpikePips"],
               aggregatorName: "Average",
