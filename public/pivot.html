@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="root" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <link rel="stylesheet" href="data.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+
+  <!-- external libs from cdnjs -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+  <!-- PivotTable.js libs from ../dist -->
+  <link rel="stylesheet" type="text/css" href="pivot.min.css">
+  <script type="text/javascript" src="pivot.min.js"></script>
+
+
+  <script src="/pivot.js"></script>
+</head>
+
+<body>
+
+  <div ng-controller="willy">
+    <select ng-model="eiid" ng-options="ei.EIname for ei in releases" ng-change="change()"></select>
+
+    <div id="output" style="margin: 30px;"></div>
+
+  </div>
+
+</body>
+</html>
